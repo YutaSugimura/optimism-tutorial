@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "@eth-optimism/contracts": "^0.1.10",
-    "@eth-optimism/plugins": "^0.0.6",
+    "@eth-optimism/plugins": "^0.0.20",
     "@eth-optimism/watcher": "^0.0.1-alpha.9",
     "dotenv": "^8.2.0"
   }

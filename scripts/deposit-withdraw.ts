@@ -1,5 +1,5 @@
-import { JsonRpcProvider, Provider } from '@ethersproject/providers'
-import { Wallet, ContractFactory, Contract } from 'ethers'
+import { JsonRpcProvider } from '@ethersproject/providers'
+import { Wallet } from 'ethers'
 import { Watcher } from '@eth-optimism/watcher'
 import * as dotenv from 'dotenv'
 dotenv.config({ path: __dirname + '/../.env' });
@@ -59,6 +59,9 @@ const main = async () => {
     console.log('~'.repeat(description.length) + '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n')
   }
 
+  console.log('\n\nInitial balance')
+  await logBalances()
+
   // Approve
   console.log('Approving L1 deposit contract...')
   const approveTx = await L1_ERC20.approve(OVM_L1ERC20Gateway.address, 1)
@@ -87,7 +90,7 @@ const main = async () => {
   console.log('Withdrawal tx hash:' + withdrawalTx.hash) 
 
   await logBalances()
- 
+
   const [l2ToL1msgHash] = await watcher.getMessageHashesFromL2Tx(withdrawalTx.hash)
   console.log('got L2->L1 message hash', l2ToL1msgHash)
   const l1Receipt = await watcher.getL1TransactionReceipt(l2ToL1msgHash)
